@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +16,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using ProjectApp.API.Data;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using ProjectApp.API.Helpers;
 
 namespace ProjectApp.API
 {
@@ -53,6 +57,21 @@ namespace ProjectApp.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else 
+            {
+                app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
             }
 
             // app.UseHttpsRedirection();
