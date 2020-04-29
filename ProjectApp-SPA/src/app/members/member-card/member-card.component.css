@@ -24,6 +24,7 @@
     margin-right: auto;
     margin-left: auto;
     opacity: 0;
+    display: inline;
 }
 
 .card-img-wrapper:hover .member-icons {
@@ -33,4 +34,9 @@
 
 .animate {
     transition: all 0.3s ease-in-out;
+}
+
+img {
+    max-height: 128px;
+    max-width: 128px;
 }
