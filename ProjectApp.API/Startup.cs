@@ -57,6 +57,7 @@ namespace ProjectApp.API
                       ValidateAudience = false
                   };
                 });
+            services.AddScoped<LogUserActivity>();
                 
         }
 
