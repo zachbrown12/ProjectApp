@@ -10,6 +10,8 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 
 
@@ -66,6 +68,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
       BrowserAnimationsModule,
       NgxGalleryModule,
       FileUploadModule,
+      ButtonsModule.forRoot(),
+      PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
       TabsModule.forRoot(),
